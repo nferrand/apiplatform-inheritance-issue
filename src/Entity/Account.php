@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -31,7 +29,6 @@ class Account
      * @ORM\Column(type="guid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidOrderedTimeGenerator")
-     * @Groups({"admin:read", "owner:read", "account:read"})
      */
     protected $id;
 
@@ -39,7 +36,6 @@ class Account
     /**
      * @var string
      * @ORM\Column(type="string")
-     * @Groups({"admin:read", "owner:read", "account:write", "account:read", "owner:write"})
      * @Assert\NotBlank()
      */
     protected $name;
@@ -49,7 +45,6 @@ class Account
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Email()
-     * @Groups({"admin:read", "owner:read", "account:write", "account:read"})
      *
      * @var string
      */
@@ -57,7 +52,6 @@ class Account
 
     /**
      * @ORM\Column(type="json", options={"jsonb": true})
-     * @Groups({"admin:read", "admin:write"})
      *
      * @var array
      */

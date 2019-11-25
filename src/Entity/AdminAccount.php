@@ -5,7 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -22,7 +21,6 @@ class AdminAccount extends Account
     /**
      * @var Hub
      * @ORM\ManyToOne(targetEntity="App\Entity\Hub")
-     * @Groups({"admin:read", "owner:read", "admin:write"})
      */
     protected $defaultHub;
 
@@ -31,7 +29,6 @@ class AdminAccount extends Account
      *
      * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Hub")
-     * @Groups({"admin:read", "admin:write"})
      * @ORM\JoinTable(name="vmm_account_hubs",
      *      joinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="hub_id", referencedColumnName="id")}
@@ -46,7 +43,7 @@ class AdminAccount extends Account
 
     /**
      * @param Hub $defaultHub
-     * @return VmmAccount
+     * @return self
      */
     public function setDefaultHub(Hub $defaultHub)
     {
@@ -66,7 +63,7 @@ class AdminAccount extends Account
     /**
      * @param ArrayCollection $associatedHubs
      *
-     * @return VmmAccount
+     * @return self
      */
     public function setAssociatedHubs($associatedHubs)
     {
